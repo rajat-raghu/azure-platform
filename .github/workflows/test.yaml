@@ -66,7 +66,7 @@ jobs:
   dev-deploy:
     name: "Dev Deploy"
     runs-on: ubuntu-latest
-    environment: dev
+    environment: qa
     needs: code-scan
     # defaults:
     #     run:
@@ -77,9 +77,6 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
     steps:
-      - name: check 
-        id: check
-        run: tree
 
       - name: Terraform Init
         id: init
@@ -87,8 +84,8 @@ jobs:
 
       - name: Terraform Plan
         id: dev-plan
-        run: terraform plan -var-file="../environment/dev.tfvars"
+        run: terraform plan -var-file="../environment/qa.tfvars"
 
       - name: Terraform Apply
         id: qa-apply
-        run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
+        run: terraform apply -var-file="../environment/qa.tfvars" -auto-approve 
