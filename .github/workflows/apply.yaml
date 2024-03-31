@@ -85,9 +85,9 @@ jobs:
         id: init
         run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
 
-      - name: Terraform Plan
-        id: dev-plan
-        run: terraform plan -var-file="../environment/${{ vars.ENV }}.tfvars"
+      # - name: Terraform Plan
+      #   id: qa-plan
+      #   run: terraform plan -var-file="../environment/${{ vars.ENV }}.tfvars"
 
       - name: Terraform Apply
         id: qa-apply
@@ -115,10 +115,10 @@ jobs:
         id: init
         run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
 
-      - name: Terraform Plan
-        id: dev-plan
-        run: terraform plan -var-file="../environment/${{ vars.ENV }}.tfvars"
+      # - name: Terraform Plan
+      #   id: prod-plan
+      #   run: terraform plan -var-file="../environment/${{ vars.ENV }}.tfvars"
 
       - name: Terraform Apply
-        id: qa-apply
+        id: prod-apply
         run: terraform apply -var-file="../environment/${{ vars.ENV }}.tfvars" -auto-approve 
