@@ -54,13 +54,12 @@ jobs:
             soft_fail: false
      
       - name: Terraform Plan
-        id: plan
+        id: dev-plan
         run: terraform plan -var-file="../environment/dev.tfvars"
 
-      - name: Wait for approval
-        uses: trstringer/manual-approval@v1
-        with:
-          minimum-approvals: 1
-          secret: ${{ github.TOKEN }}
+      - name: Terraform Apply
+        id: dev-apply
+        run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
+
 
         
