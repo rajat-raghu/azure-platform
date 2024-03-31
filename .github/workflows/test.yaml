@@ -67,9 +67,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: code-scan
-    defaults:
-        run:
-            working-directory: /platform
+    # defaults:
+    #     run:
+    #         working-directory: /platform
     env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
