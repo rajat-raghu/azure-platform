@@ -64,5 +64,6 @@ jobs:
         with:
           approvers: rajat-raghu
           minimum-approvals: 1
+          secret: ${{ github.TOKEN }}
 
         
