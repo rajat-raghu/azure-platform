@@ -1,6 +1,8 @@
 name: "Terraform Plan"
 on:
     push:
+      tags:
+      - 'v.*'
       branches:
       - main
     pull_request:
@@ -94,7 +96,7 @@ jobs:
         run: terraform apply -var-file="../environment/${{ vars.ENV }}.tfvars" -auto-approve 
 
   prod-deploy:
-    name: "QA Deploy"
+    name: "Prod Deploy"
     runs-on: ubuntu-latest
     environment: 
         name: prod
