@@ -48,6 +48,7 @@ jobs:
       
       - name: Upload Checkov Results  
         uses: actions/upload-artifact@v2
+        working-directory: ../
         with:
             name: checkov-report
             path: checkov-report.json
