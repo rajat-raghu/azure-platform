@@ -77,7 +77,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
     steps:
       - name: check 
-        run: ls .
+        run: tree
 
       - name: Terraform Init
         id: init
