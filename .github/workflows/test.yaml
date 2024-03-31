@@ -48,15 +48,10 @@ jobs:
             download_external_modules: true
             output_file_path: platform/
 
-      - name: TFsec
-        id: tfsec
-        run: tfsec . --force-all-dirs --include-passed
-
-      - name: Upload Checkov Results  
-        uses: actions/upload-artifact@v2
+      - name: tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
         with:
-            name: checkov-report
-            path: results_sarif.sarif
+            soft_fail: false
      
       - name: Terraform Plan
         id: plan
