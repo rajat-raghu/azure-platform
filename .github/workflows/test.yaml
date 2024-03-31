@@ -50,7 +50,7 @@ jobs:
             download_external_modules: true
             output_file_path: platform/
 
-      - name: Terraform Plan
+      - name: Terraform validate
         id: validate
         run: terraform validate
      
