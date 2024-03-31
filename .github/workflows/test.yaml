@@ -67,9 +67,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     needs: code-scan
-    defaults:
-        run:
-            working-directory: ./platform
+    # defaults:
+    #     run:
+    #         working-directory: ./platform
     env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -81,7 +81,7 @@ jobs:
         run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
 
       - name: Terraform Plan
-        id: qa-plan
+        id: dev-plan
         run: terraform plan -var-file="../environment/dev.tfvars"
 
       - name: Terraform Apply
