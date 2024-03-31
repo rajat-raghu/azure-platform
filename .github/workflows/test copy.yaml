@@ -1,63 +1,63 @@
-name: "Terraform test"
-on:
-    push:
-      branches:
-      - main
-    pull_request:
-      branches:
-      - main
-env:
-    TF_VERSION: 1.1.7
-jobs:
-  check:
-    name: "Code Scan Terraform"
-    runs-on: ubuntu-latest
-    environment: dev
-    defaults:
-        run:
-          working-directory: ./platform
-    env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+# name: "Terraform test"
+# on:
+#     push:
+#       branches:
+#       - main
+#     pull_request:
+#       branches:
+#       - main
+# env:
+#     TF_VERSION: 1.1.7
+# jobs:
+#   check:
+#     name: "Code Scan Terraform"
+#     runs-on: ubuntu-latest
+#     environment: dev
+#     defaults:
+#         run:
+#           working-directory: ./platform
+#     env:
+#       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+#       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+#       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
+#       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-            terraform_version: ${{ env.TF_VERSION }}
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#             terraform_version: ${{ env.TF_VERSION }}
 
-  terraform:
-    name: "Code Scan Terraform"
-    runs-on: ubuntu-latest
-    environment: qa
-    defaults:
-        run:
-          working-directory: ./platform
-    env:
-      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
-      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
-    steps:
-      - name: gasvjxsabhx
-        run: ls
-      - name: check 
-        uses: macnev2013/manual-approval@latest
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: rajat-raghu
-          minimum-approvals: 1
-          approval-wait: 600
-          issue-title: 'Manual Approval'
-      - name: Wait for approval
-        uses: trstringer/manual-approval@v1
-        with:
-          minimum-approvals: 1
-          secret: ${{ github.TOKEN }}
-          approvers: rajat-raghu
+#   terraform:
+#     name: "Code Scan Terraform"
+#     runs-on: ubuntu-latest
+#     environment: qa
+#     defaults:
+#         run:
+#           working-directory: ./platform
+#     env:
+#       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+#       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+#       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
+#       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+#     steps:
+#       - name: gasvjxsabhx
+#         run: ls
+#       - name: check 
+#         uses: macnev2013/manual-approval@latest
+#         with:
+#           secret: ${{ github.TOKEN }}
+#           approvers: rajat-raghu
+#           minimum-approvals: 1
+#           approval-wait: 600
+#           issue-title: 'Manual Approval'
+#       - name: Wait for approval
+#         uses: trstringer/manual-approval@v1
+#         with:
+#           minimum-approvals: 1
+#           secret: ${{ github.TOKEN }}
+#           approvers: rajat-raghu
 
         
