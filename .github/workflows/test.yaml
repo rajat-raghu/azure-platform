@@ -16,7 +16,6 @@ jobs:
     defaults:
         run:
           working-directory: ./platform
-    # Add env variables for service principal
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -47,7 +46,7 @@ jobs:
             framework: terraform
             skip_check: CKV_TF_1
             download_external_modules: true
-            output_file_path: .
+            output_file_path: platform/
 
       - name: Upload Checkov Results  
         uses: actions/upload-artifact@v2
