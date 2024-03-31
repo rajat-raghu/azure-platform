@@ -14,7 +14,7 @@ jobs:
     name: "Code Scan & dev deploy"
     runs-on: ubuntu-latest
     environment: 
-        name: qa
+        name: dev
     defaults:
         run:
           working-directory: ./platform
@@ -67,7 +67,8 @@ jobs:
   dev-deploy:
     name: "Dev Deploy"
     runs-on: ubuntu-latest
-    environment: qa
+    environment: 
+        name: qa
     needs: code-scan
     # defaults:
     #     run:
