@@ -9,7 +9,7 @@ on:
 env:
     TF_VERSION: 1.1.7
 jobs:
-  terraform:
+  check:
     name: "Code Scan Terraform"
     runs-on: ubuntu-latest
     environment: dev
@@ -22,6 +22,29 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+            terraform_version: ${{ env.TF_VERSION }}
+
+  terraform:
+    name: "Code Scan Terraform"
+    runs-on: ubuntu-latest
+    environment: qa
+    defaults:
+        run:
+          working-directory: ./platform
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+    steps:
+      - name: gasvjxsabhx
+        run: ls
       - name: check 
         uses: macnev2013/manual-approval@latest
         with:
