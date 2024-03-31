@@ -53,10 +53,16 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: checkov-report
-            path: checkov-report.json
+            path: results_sarif.sarif
      
       - name: Terraform Plan
         id: plan
         run: terraform plan -var-file="../environment/dev.tfvars"
+
+      - name: Wait for approval
+        uses: trstringer/manual-approval@v1
+        with:
+          approvers: rajat-raghu
+          minimum-approvals: 1
 
         
