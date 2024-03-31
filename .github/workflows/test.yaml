@@ -41,7 +41,7 @@ jobs:
       - name: Checkov Scan
         uses: bridgecrewio/checkov-action@master
         with:
-            directory: ./terraform
+            directory: .
             soft_fail: false
             framework: terraform
       
