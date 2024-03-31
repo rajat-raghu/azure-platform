@@ -27,6 +27,10 @@ jobs:
     defaults:
       run:
         working-directory: ./platform
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE__CLIENT_SECRET }}  
+    environment: dev
     steps:
     - uses: actions/checkout@v2
     
