@@ -70,15 +70,22 @@ jobs:
     environment: 
         name: qa
     needs: code-scan
-    # defaults:
-    #     run:
-    #         working-directory: /platform
+    defaults:
+        run:
+            working-directory: ./platform
     env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+    #   - name: Setup Terraform
+    #     uses: hashicorp/setup-terraform@v1
+    #     with:
+    #         terraform_version: ${{ env.TF_VERSION }}
 
       - name: Terraform Init
         id: init
