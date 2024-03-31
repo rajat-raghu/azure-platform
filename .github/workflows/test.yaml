@@ -9,7 +9,7 @@ on:
 env:
     TF_VERSION: 1.1.7
 jobs:
-  code-scan-dev-deploy:
+  code-scan:
     name: "Code Scan & dev deploy"
     runs-on: ubuntu-latest
     environment: dev
@@ -53,20 +53,20 @@ jobs:
         with:
             soft_fail: false
      
-      - name: Terraform Plan
-        id: dev-plan
-        run: terraform plan -var-file="../environment/dev.tfvars"
+    #   - name: Terraform Plan
+    #     id: dev-plan
+    #     run: terraform plan -var-file="../environment/dev.tfvars"
 
-      - name: Terraform Apply
-        id: dev-apply
-        run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
+    #   - name: Terraform Apply
+    #     id: dev-apply
+    #     run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
 
 
-  qa-deploy:
-    name: "Code Scan Terraform"
+  dev-deploy:
+    name: "Dev Deploy"
     runs-on: ubuntu-latest
-    environment: qa
-    needs: code-scan-dev-deploy
+    environment: dev
+    needs: code-scan
     defaults:
         run:
             working-directory: ./platform
@@ -82,8 +82,8 @@ jobs:
 
       - name: Terraform Plan
         id: qa-plan
-        run: terraform plan -var-file="../environment/qa.tfvars"
+        run: terraform plan -var-file="../environment/dev.tfvars"
 
       - name: Terraform Apply
         id: qa-apply
-        run: terraform apply -var-file="../environment/qa.tfvars" -auto-approve 
+        run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
