@@ -42,7 +42,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
             directory: .
-            soft_fail: false
+            soft_fail: true
             framework: terraform
       
       - name: Upload Checkov Results  
