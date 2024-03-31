@@ -52,10 +52,10 @@ jobs:
             name: checkov-report
             path: checkov-report.json
       - name: check 
-        run: ls 
+        run: ls  ../
      
       - name: Terraform Plan
         id: plan
-        run: terraform plan -var-file="environment/dev.tfvars"
+        run: terraform plan -var-file="../environment/dev.tfvars"
 
         
