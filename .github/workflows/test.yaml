@@ -10,7 +10,7 @@ env:
     TF_VERSION: 1.1.7
 jobs:
   terraform:
-    name: "Run Terraform Plan"
+    name: "Code Scan Terraform"
     runs-on: ubuntu-latest
     environment: dev
     defaults:
@@ -37,7 +37,22 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
+
+      - name: Checkov Scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+            directory: ./terraform
+            soft_fail: false
+            framework: terraform
+      
+      - name: Upload Checkov Results  
+        uses: actions/upload-artifact@v2
+        with:
+            name: checkov-report
+            path: checkov-report.json
      
       - name: Terraform Plan
         id: plan
-        run: terraform plan
+        run: terraform plan -var-file="environment\dev.tfvars"
+
+        
