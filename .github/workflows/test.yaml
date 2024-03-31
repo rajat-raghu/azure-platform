@@ -13,7 +13,8 @@ jobs:
   code-scan:
     name: "Code Scan & dev deploy"
     runs-on: ubuntu-latest
-    environment: dev
+    environment: 
+        name: qa
     defaults:
         run:
           working-directory: ./platform
