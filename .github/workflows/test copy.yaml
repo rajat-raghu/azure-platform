@@ -22,41 +22,14 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1
-      #   with:
-      #       terraform_version: ${{ env.TF_VERSION }}
-
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt -check
-
-      # - name: Terraform Init
-      #   id: init
-      #   run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
-
-      # - name: Checkov Scan
-      #   uses: bridgecrewio/checkov-action@master
-      #   with:
-      #       directory: .
-      #       soft_fail: false
-      #       framework: terraform
-      #       skip_check: CKV_TF_1
-      #       download_external_modules: true
-      #       output_file_path: platform/
-
-      # - name: tfsec
-      #   uses: aquasecurity/tfsec-action@v1.0.0
-      #   with:
-      #       soft_fail: false
-     
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -var-file="../environment/dev.tfvars"
-
+      - name: check 
+        uses: macnev2013/manual-approval@latest
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: rajat-raghu
+          minimum-approvals: 1
+          approval-wait: 600
+          issue-title: 'Manual Approval'
       - name: Wait for approval
         uses: trstringer/manual-approval@v1
         with:
