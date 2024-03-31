@@ -9,8 +9,8 @@ on:
 env:
     TF_VERSION: 1.1.7
 jobs:
-  terraform:
-    name: "Code Scan Terraform"
+  code-scan-dev-deploy:
+    name: "Code Scan & dev deploy"
     runs-on: ubuntu-latest
     environment: dev
     defaults:
@@ -62,4 +62,28 @@ jobs:
         run: terraform apply -var-file="../environment/dev.tfvars" -auto-approve 
 
 
-        
+  qa-deploy:
+    name: "Code Scan Terraform"
+    runs-on: ubuntu-latest
+    environment: qa
+    needs: code-scan-dev-deploy
+    defaults:
+        run:
+            working-directory: ./platform
+    env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+    steps:
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config "container_name=${{ vars.SA_CONTAINER }}"
+
+      - name: Terraform Plan
+        id: qa-plan
+        run: terraform plan -var-file="../environment/qa.tfvars"
+
+      - name: Terraform Apply
+        id: qa-apply
+        run: terraform apply -var-file="../environment/qa.tfvars" -auto-approve 
