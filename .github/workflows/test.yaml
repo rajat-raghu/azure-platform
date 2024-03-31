@@ -47,13 +47,13 @@ jobs:
             framework: terraform
             skip_check: CKV_TF_1
             download_external_modules: true
-    #   - name: check 
-    #     run: pwd
-    #   - name: Upload Checkov Results  
-    #     uses: actions/upload-artifact@v2
-    #     with:
-    #         name: checkov-report
-    #         path: ../checkov-report.json
+            output_file_path: .
+            
+      - name: Upload Checkov Results  
+        uses: actions/upload-artifact@v2
+        with:
+            name: checkov-report
+            path: ../checkov-report.json
      
       - name: Terraform Plan
         id: plan
