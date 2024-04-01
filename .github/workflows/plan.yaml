@@ -16,7 +16,7 @@ jobs:
     name: "Code Scan & Dev Plan"
     runs-on: ubuntu-latest
     environment: 
-        name: dev
+        name: dev-plan
     defaults:
         run:
           working-directory: ./platform
